@@ -17,6 +17,13 @@ const CredentialSharing = NativeModules.CredentialSharing
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return CredentialSharing.multiply(a, b);
+export type CredentialResponse = {
+  accessToken: string;
+  name: string;
+};
+
+export function getSharedCredentials(
+  uri: string
+): Promise<CredentialResponse[]> {
+  return CredentialSharing.getSharedCredentials(uri);
 }
