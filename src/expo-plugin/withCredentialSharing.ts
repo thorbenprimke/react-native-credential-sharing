@@ -1,4 +1,9 @@
-import { withPlugins, AndroidConfig, ConfigPlugin, createRunOncePlugin } from '@expo/config-plugins';
+import { 
+    withPlugins,
+    // AndroidConfig,
+    ConfigPlugin,
+    createRunOncePlugin
+} from '@expo/config-plugins';
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment
 const pkg = require('../../../package.json');
 
@@ -12,6 +17,9 @@ type Props = {
 const withCredentialSharing: ConfigPlugin<Props> = (config, props = {}) => {
   if (config.ios == null) config.ios = {};
   if (config.ios.infoPlist == null) config.ios.infoPlist = {};
+  if (props.android) {
+      
+  }
 //   config.ios.infoPlist.NSCameraUsageDescription =
 //     props.cameraPermissionText ?? (config.ios.infoPlist.NSCameraUsageDescription as string | undefined) ?? CAMERA_USAGE;
 //   if (props.enableMicrophonePermission) {
