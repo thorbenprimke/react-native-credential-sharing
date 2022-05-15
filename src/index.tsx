@@ -23,7 +23,24 @@ export type CredentialResponse = {
 };
 
 export function getSharedCredentials(
-  uri: string
-): Promise<CredentialResponse[]> {
-  return CredentialSharing.getSharedCredentials(uri);
+  android?: {
+    uri: string;
+  },
+  iOS?: {
+    service: string;
+    account: string;
+    accessGroup: string;
+  }
+): Promise<CredentialResponse[] | string> {
+  if (Platform.OS === 'android' && android) {
+    return CredentialSharing.getSharedCredentials(android.uri);
+  } else if (Platform.OS === 'ios' && iOS) {
+    return CredentialSharing.getSharedCredentials(
+      iOS.service,
+      iOS.account,
+      iOS.accessGroup
+    );
+  } else {
+    return Promise.reject('Invalid arguments provided - lets check');
+  }
 }

@@ -10,4 +10,9 @@ class CredentialSharing: NSObject {
      reject: RCTPromiseRejectBlock) -> Void {
          resolve(CredentialSharingKeychainAccess.shared.accessToken(service: service, account: account, accessGroup: accessGroup))
     }
+    
+    @objc
+    static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
 }
