@@ -1,6 +1,6 @@
 import { 
     withPlugins,
-    // AndroidConfig,
+    AndroidConfig,
     ConfigPlugin,
     createRunOncePlugin
 } from '@expo/config-plugins';
@@ -11,34 +11,29 @@ type Props = {
   android?: {
       usesPermissionName: string;
       providerName: string;
+  },
+  ios?: {
+      accessGroupName: string;
   }
 };
 
 const withCredentialSharing: ConfigPlugin<Props> = (config, props = {}) => {
-  if (config.ios == null) config.ios = {};
-  if (config.ios.infoPlist == null) config.ios.infoPlist = {};
+  const androidPermissions = [];
   if (props.android) {
-      
+    if (props.android.usesPermissionName) {
+      androidPermissions.push(props.android.usesPermissionName)
+    }
+    // TODO: handle providerName
   }
-//   config.ios.infoPlist.NSCameraUsageDescription =
-//     props.cameraPermissionText ?? (config.ios.infoPlist.NSCameraUsageDescription as string | undefined) ?? CAMERA_USAGE;
-//   if (props.enableMicrophonePermission) {
-//     config.ios.infoPlist.NSMicrophoneUsageDescription =
-//       props.microphonePermissionText ?? (config.ios.infoPlist.NSMicrophoneUsageDescription as string | undefined) ?? MICROPHONE_USAGE;
-//   }
-//   const androidPermissions = ['android.permission.CAMERA'];
-//   if (props.enableMicrophonePermission) androidPermissions.push('android.permission.RECORD_AUDIO');
-
-//   if (props.disableFrameProcessors) {
-//     config = withDisableFrameProcessorsAndroid(config);
-//     config = withDisableFrameProcessorsIOS(config);
-//   }
+  if (props.ios) {
+      // TODO: handle accessGroupName
+  }
 
   return withPlugins(
       config,
       [
-        //   [AndroidConfig.Permissions.withPermissions, androidPermissions]
-    ]
+        [AndroidConfig.Permissions.withPermissions, androidPermissions]
+      ]
     );
 };
 
