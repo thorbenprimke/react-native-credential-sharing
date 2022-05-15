@@ -3,7 +3,7 @@
 
 @interface RCT_EXTERN_MODULE(CredentialSharing, NSObject)
 
-RCT_EXTERN_METHOD(getSharedCredentials:(String)a withB:(String)b withC:(String)c
+RCT_EXTERN_METHOD(getSharedCredentials:(NSString *)a withB:(NSString *)b withC:(NSString *)c
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 
