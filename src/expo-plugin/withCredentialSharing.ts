@@ -14,6 +14,7 @@ type Props = {
   },
   ios?: {
       accessGroupName: string;
+      otherValue: string;
   }
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "react-native-credential-sharing",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A library that let's you easily share credentials between your apps.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
