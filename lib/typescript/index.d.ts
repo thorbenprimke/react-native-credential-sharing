@@ -1,6 +1,8 @@
 export declare type CredentialResponse = {
     accessToken: string;
-    name: string;
+    id?: string;
+    username?: string;
+    name?: string;
 };
 export declare function getSharedCredentials(android?: {
     uri: string;
@@ -8,4 +10,4 @@ export declare function getSharedCredentials(android?: {
     service: string;
     account: string;
     accessGroup: string;
-}): Promise<CredentialResponse[] | string>;
+}): Promise<CredentialResponse[]>;
