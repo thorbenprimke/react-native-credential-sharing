@@ -19,10 +19,12 @@ const CredentialSharing = NativeModules.CredentialSharing
 
 export type CredentialResponse = {
   accessToken: string;
-  name: string;
+  id?: string;
+  username?: string;
+  name?: string;
 };
 
-export function getSharedCredentials(
+export async function getSharedCredentials(
   android?: {
     uri: string;
   },
@@ -31,15 +33,24 @@ export function getSharedCredentials(
     account: string;
     accessGroup: string;
   }
-): Promise<CredentialResponse[] | string> {
+): Promise<CredentialResponse[]> {
   if (Platform.OS === 'android' && android) {
     return CredentialSharing.getSharedCredentials(android.uri);
   } else if (Platform.OS === 'ios' && iOS) {
-    return CredentialSharing.getSharedCredentials(
+    const result = await CredentialSharing.getSharedCredentials(
       iOS.service,
       iOS.account,
       iOS.accessGroup
     );
+    if (result) {
+      return Promise.resolve([
+        {
+          accessToken: result,
+        },
+      ]);
+    } else {
+      return Promise.resolve([]);
+    }
   } else {
     return Promise.reject('Invalid arguments provided - lets check');
   }
