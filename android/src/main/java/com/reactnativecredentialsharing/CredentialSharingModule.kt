@@ -27,7 +27,6 @@ class CredentialSharingModule(reactContext: ReactApplicationContext) : ReactCont
   fun getSharedCredentials(uri: String, promise: Promise) {
     val resultArray: WritableArray = WritableNativeArray()
     val contentResolver = reactApplicationContext.applicationContext.contentResolver
-    val LOG_TAG = "CURSOR"
     var cursor: Cursor? = null
     try {
       cursor = contentResolver.query(
@@ -37,7 +36,9 @@ class CredentialSharingModule(reactContext: ReactApplicationContext) : ReactCont
         null
       )
     } catch (e: Exception) {
-      Log.d(LOG_TAG, e.message)
+      Log.d(name, e.message ?: "No error message provided")
+      promise.resolve(resultArray)
+      return
     }
     if (cursor == null) {
       promise.resolve(resultArray)
@@ -46,16 +47,10 @@ class CredentialSharingModule(reactContext: ReactApplicationContext) : ReactCont
     if (cursor.moveToFirst()) {
       while (!cursor.isAfterLast) {
         val item: WritableMap = WritableNativeMap()
-        val accessToken = cursor.getString(cursor.getColumnIndex("accessToken"))
-        val id = cursor.getString(cursor.getColumnIndex("id"))
-        val username = cursor.getString(cursor.getColumnIndex("username"))
-        val name = cursor.getString(cursor.getColumnIndex("name"))
-        Log.d(LOG_TAG, accessToken)
-        Log.d(LOG_TAG, name)
-        item.putString("accessToken", accessToken)
-        item.putString("id", id)
-        item.putString("username", username)
-        item.putString("name", name)
+        item.putString("accessToken", cursor.getString(cursor.getColumnIndex("accessToken")))
+        item.putString("id", cursor.getString(cursor.getColumnIndex("id")))
+        item.putString("username", cursor.getString(cursor.getColumnIndex("username")))
+        item.putString("name", cursor.getString(cursor.getColumnIndex("name")))
         resultArray.pushMap(item)
         cursor.moveToNext()
       }
