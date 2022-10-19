@@ -1,13 +1,2 @@
-export declare type CredentialResponse = {
-    accessToken: string;
-    id?: string;
-    username?: string;
-    name?: string;
-};
-export declare function getSharedCredentials(android?: {
-    uri: string;
-}, iOS?: {
-    service: string;
-    account: string;
-    accessGroup: string;
-}): Promise<CredentialResponse[]>;
+export declare function multiply(a: number, b: number): Promise<number>;
+//# sourceMappingURL=index.d.ts.map

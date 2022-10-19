@@ -1,17 +1,15 @@
-# react-native-credential-sharing
-
-A library that let's you easily share credentials between your apps.
-
+# react-native-awesome-library
+adsf
 ## Installation
 
 ```sh
-npm install react-native-credential-sharing
+npm install react-native-awesome-library
 ```
 
 ## Usage
 
 ```js
-import { multiply } from "react-native-credential-sharing";
+import { multiply } from "react-native-awesome-library";
 
 // ...
 
@@ -25,3 +23,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
+
+---
+
+Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

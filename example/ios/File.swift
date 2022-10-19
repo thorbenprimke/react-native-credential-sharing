@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  CredentialSharingExample
+//  AwesomeLibraryExample
 //
 
 import Foundation
